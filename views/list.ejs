@@ -1,0 +1,31 @@
+<%- include("header") -%>  <!-- layout -->
+    <div class="box" id="heading">
+      <h1 > <%= pageTitle %> </h1> <!--var kindofday add the current date -->
+    </div>
+
+    <div class="box">
+
+
+      <%newListItems.forEach(function(item){ %>
+        <form action="/delete" method="post">
+        <div class="item">
+          <input type="checkbox" name="checkbox" value="<%=item._id%>" onchange="this.form.submit()">
+          <p><%= item.name %></p> <!--a single paragraph that contains all the items in the array. getting the name of each document -->
+        </div>
+        <input type="hidden" name="listName" value="<%=pageTitle%>"></input>
+        </form>
+      <% }); %>
+
+      <%# for (let i=0; i<newListItems.length; i++) { %> <!--when new item is added, we need to display the previous added items as well-->
+      <!-- <div class="item">
+        <input type="checkbox">
+        <p>< newListItems[i].name %></p> <!--a single paragraph that contains all the items in the array. getting the name of each document -->
+      <!-- </div> -->
+       <%# } %>
+
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+        <button type="submit" name="list" value="<%= pageTitle %>">+</button>
+      </form>
+    </div>
+<%- include("footer") -%>  <!-- layout -->
